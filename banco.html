@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucro</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>  
+    <header>
+        <h1 >Lucro NuBank</h1>
+    </header>  
+    <section>
+        <p><strong>Digite a Quantidade de dinheiro ou deposito na NuBank</strong><br>
+        <input type="number" name="txt1" id="txt1">
+        </p>
+
+        <p><strong></strong>Digite a frenquencia do deposito do valor acima em dias <strong>(Opcional)</strong><br>
+        <input type="number" name="passo" id="passo">
+        </p>
+
+        <p>
+            <strong>Calculo em dias ou em meses?</strong> <br>
+            <input type="radio" name="escolha" id="dia" checked>
+            <label for="dia">Dia</label>
+            <input type="radio" name="escolha" id="mes">
+            <label for="mes">Mês</label>
+
+        </p>
+
+        <p><strong>Digite a quantidade de dias/mês desejados</strong><br>
+        <input type="number" name="txt2" id="txt2">
+        </p>
+
+        <div id="mes">*mês = 30 dias</div>
+
+        <input type="button" value="Calcular" name="btn" id="btn" onclick="calcular()">
+
+        <div id="res"></div>
+
+    </section>
+    <footer>&copy;Magno</footer>  
+    <script src="script.js"></script>   
+</body>
+</html>

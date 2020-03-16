@@ -1,0 +1,49 @@
+body {
+    background-color: #8A05BE;
+}
+h1{
+    color: white;
+    text-align: center;
+    text-shadow: 5px 3px 5px rgba(0, 0, 0, 0.473);;
+}
+section{  
+    background: white;  
+    padding: 1%;
+    margin: auto;
+    width: 45%;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.295);    
+}
+p{
+    text-align: center;
+    color: rgb(15, 15, 15);       
+}
+input{
+    margin: 0.5%;
+}
+#btn{
+    margin-left: 40%;
+    margin-left: 40%;
+    width: 20%;
+    background-color: rgb(112, 21, 85);
+    color: white;
+    padding: 1%;
+    font-size: 0.9em;
+}
+#mes{
+    font-size: 0.6em;
+    color: black;
+}
+div{
+    text-align: center;
+}
+div#res{    
+    margin: 5%;
+}
+
+footer{
+    color: white;  
+    text-align: center;  
+    margin: 4%;
+    text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.904);
+}
