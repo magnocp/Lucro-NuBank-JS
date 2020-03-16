@@ -1,10 +1,37 @@
+var resuldo = document.getElementById('res')
+var checar = document.getElementsByName('escolha')
+
+function resposta(tempo, acrescimo, total, dMes=1){
+    if(checar[0].checked){ // dia
+        if( tempo == 1 ){
+            resuldo.innerHTML = `O seu lucro em <strong>${tempo}</strong> dia é de aproximadamente <strong>${acrescimo.toFixed(2).replace(".", ",")}</strong> <br>
+            ficando assim no total de <strong>${total.toFixed(2).replace(".", ",")}<strong>`
+        }
+        else{
+            resuldo.innerHTML = `O seu lucro em <strong>${tempo}</strong> dias é de aproximadamente <strong>${acrescimo.toFixed(2).replace(".", ",")}</strong> <br>
+            ficando assim no total de <strong>${total.toFixed(2).replace(".", ",")}<strong>`
+        }  
+    }
+    else if(checar[1].checked){ // mês 
+        if( dMes == 1 ){
+            resuldo.innerHTML = `O seu lucro em <strong>${tempo}</strong> mês é de aproximadamente <strong>${acrescimo.toFixed(2).replace(".", ",")}</strong> <br>
+            ficando assim no total de <strong>${total.toFixed(2).replace(".", ",")}<strong>`
+        }
+        else{
+            resuldo.innerHTML = `O seu lucro em <strong>${tempo}</strong> meses é de aproximadamente <strong>${acrescimo.toFixed(2).replace(".", ",")}</strong> <br>
+            ficando assim no total de <strong>${total.toFixed(2).replace(".", ",")}<strong>`
+        }    
+
+    }
+        
+}
+
+
 function calcular(){
     var money = document.getElementById('txt1')
     var day = document.getElementById('txt2')
-    var pas = document.getElementById('passo')
-    var resuldo = document.getElementById('res')
-    var checar = document.getElementsByName('escolha')
-
+    var pas = document.getElementById('passo')  
+    
     var dinheiro = Number(money.value)
     var dias = Number(day.value)    
     var diasMeses = 30 * dias
@@ -48,14 +75,7 @@ function calcular(){
                     p++                                   
                 }
 
-                if( dias == 1 ){
-                    resuldo.innerHTML = `O seu lucro em <strong>${dias}</strong> dia é de aproximadamente <strong>${a.toFixed(2).replace(".", ",")}</strong> <br>
-                    ficando assim no total de <strong>${dinheiro.toFixed(2).replace(".", ",")}<strong>`
-                }
-                else{
-                    resuldo.innerHTML = `O seu lucro em <strong>${dias}</strong> dias é de aproximadamente <strong>${a.toFixed(2).replace(".", ",")}</strong> <br>
-                    ficando assim no total de <strong>${dinheiro.toFixed(2).replace(".", ",")}<strong>`
-                }
+                resposta(dias, a, dinheiro)
                 
 
             } 
@@ -87,17 +107,8 @@ function calcular(){
                     p++                                   
                 }
                 
-
-                if( diasMeses == 1 ){
-                    resuldo.innerHTML = `O seu lucro em <strong>${dias}</strong> mês é de aproximadamente <strong>${a.toFixed(2).replace(".", ",")}</strong> <br>
-                    ficando assim no total de <strong>${dinheiro.toFixed(2).replace(".", ",")}<strong>`
-                }
-                else{
-                    resuldo.innerHTML = `O seu lucro em <strong>${dias}</strong> meses é de aproximadamente <strong>${a.toFixed(2).replace(".", ",")}</strong> <br>
-                    ficando assim no total de <strong>${dinheiro.toFixed(2).replace(".", ",")}<strong>`
-                }    
-            }                                 
-            
+                resposta(dias, a, dinheiro, diasMeses)                
+            }  
         }   
 
     }else{  
@@ -112,14 +123,8 @@ function calcular(){
                 acres += lucro 
                 d++              
             }
-            if( dias == 1 ){
-                resuldo.innerHTML = `O seu lucro em <strong>${dias}</strong> dia é de aproximadamente <strong>${acres.toFixed(2).replace(".", ",")}</strong> <br>
-                ficando assim no total de <strong>${dinheiro.toFixed(2).replace(".", ",")}<strong>`
-            }
-            else{
-            resuldo.innerHTML = `O seu lucro em <strong>${dias}</strong> dias é de aproximadamente <strong>${acres.toFixed(2).replace(".", ",")}</strong> <br>
-            ficando assim no total de <strong>${dinheiro.toFixed(2).replace(".", ",")}<strong>`
-            }         
+            resposta(dias, acres, dinheiro)
+             
         }
         //Mês
         else if(checar[1].checked){            
@@ -132,16 +137,12 @@ function calcular(){
                 acres += lucro 
                 d++              
             }
-            if( diasMeses == 1 ){
-                resuldo.innerHTML = `O seu lucro em <strong>${dias}</strong> mês é de aproximadamente <strong>${acres.toFixed(2).replace(".", ",")}</strong> <br>
-                ficando assim no total de <strong>${dinheiro.toFixed(2).replace(".", ",")}<strong>`
-            }
-            else{
-            resuldo.innerHTML = `O seu lucro em <strong>${dias}</strong> meses é de aproximadamente <strong>${acres.toFixed(2).replace(".", ",")}</strong> <br>
-            ficando assim no total de <strong>${dinheiro.toFixed(2).replace(".", ",")}<strong>`
-            } 
+
+            resposta(dias, acres, dinheiro, diasMeses)
+            
         }     
 
     }
 
 }
+
