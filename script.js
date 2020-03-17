@@ -26,7 +26,6 @@ function resposta(tempo, acrescimo, total, dMes=1){
         
 }
 
-
 function calcular(){
     var money = document.getElementById('txt1')
     var day = document.getElementById('txt2')
