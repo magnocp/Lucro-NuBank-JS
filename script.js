@@ -1,5 +1,5 @@
-let resuldo = document.getElementById('res')
-let checar = document.getElementsByName('escolha')
+let result = document.getElementById('res')
+let check = document.getElementsByName('escolha')
 
 function formatCurrency(value) {
   value = value.toLocaleString('pt-BR', {
@@ -10,24 +10,24 @@ function formatCurrency(value) {
   return value
 }
 
-function answer(tempo, acrescimo, total, dMes = 1) {
-  if (checar[0].checked) {
+function answer(time, add, total) {
+  if (check[0].checked) {
     // dia
-    resuldo.innerHTML = `O seu lucro em <strong>${tempo}</strong> ${
-      tempo == 1 ? 'dia' : 'dias'
-    } 
+    result.innerHTML = `O seu lucro em <strong>${time} ${
+      time == 1 ? 'dia' : 'dias'
+    } </strong>
     é de aproximadamente <strong>${formatCurrency(
-      acrescimo
+      add
     )}</strong> <br> ficando assim no total de <strong>${formatCurrency(
       total
     )}<strong>`
-  } else if (checar[1].checked) {
+  } else if (check[1].checked) {
     // mês
-    resuldo.innerHTML = `O seu lucro em <strong>${tempo}</strong> ${
-      tempo == 1 ? 'mês' : 'meses'
-    } 
+    result.innerHTML = `O seu lucro em <strong>${time} ${
+      time == 1 ? 'mês' : 'meses'
+    } </strong>
     é de aproximadamente <strong>${formatCurrency(
-      acrescimo
+      add
     )}</strong> <br> ficando assim no total de <strong>${formatCurrency(
       total
     )}<strong>`
@@ -35,115 +35,97 @@ function answer(tempo, acrescimo, total, dMes = 1) {
 }
 
 function calculate() {
-  let money = document.getElementById('txt1')
-  let day = document.getElementById('txt2')
-  let pas = document.getElementById('passo')
+  let money = Number(document.getElementById('txt1').value)
+  let day = document.getElementById('txt2').value
+  let step = document.getElementById('passo').value
 
-  let dinheiro = Number(money.value)
-  let dias = Number(day.value)
-  let diasMeses = 30 * dias
-  let periodo = Number(pas.value)
+  let daysMonths = 30 * day
 
-  if (
-    money.value.length == 0 ||
-    day.value.length == 0 ||
-    dinheiro < 0 ||
-    dias < 0
-  ) {
+  let timeCourse = day / step // quantas vezes o periodo vai repetir
+  let daytimeCourse = day / timeCourse // quantidade de dias em cada periodo
+  let money2 = money
+  let incrementTimeCourse = 1 // incremento periodo
+  let incrementDay = 1 // incremento dia
+  let acresT = 0
+  let a = 0 // acrescenta
+
+  let acres = 0
+
+  let timeCourseMonth = daysMonths / step // quantas vezes o periodo vai repetir
+  let dayTotal = daysMonths / timeCourseMonth // quantidade de dias em cada periodo
+
+  if (money.length == '' || day.length == '' || money < 0 || day < 0) {
     alert('Erro! Por favor digite os dados ou informe apenas dados positivos!')
   } else if (
-    (pas.value.length != 0 && periodo < dias) ||
-    (pas.value.length != 0 && checar[1].checked)
+    (step.length != 0 && step < daytimeCourse) ||
+    (step.length != 0 && check[1].checked)
   ) {
-    if (periodo < 0) {
+    if (step < 0) {
       alert('O período tem que ser positivo ou maior que a quantidade de dias')
     } else {
       // Dia
-      if (checar[0].checked) {
-        let acres = 0
-        let divi = dias / periodo // quantas vezes o periodo vai repetir
-        let dia = dias / divi // quantidade de dias em cada periodo
-        let dinheiro2 = dinheiro
-        let p = 1 // incremento periodo
-        let d = 1 /// incremento dia
-        let acresT = 0
-        let a = 0 // acrescenta
-
-        while (p <= divi) {
-          while (d <= dia) {
-            lucro = dinheiro * (0.011369863 / 100)
-            dinheiro += lucro
-            acres += lucro
-            d++
+      if (check[0].checked) {
+        while (incrementTimeCourse <= timeCourse) {
+          while (incrementDay <= daytimeCourse) {
+            profit = money * (0.011369863 / 100)
+            money += profit
+            acres += profit
+            incrementDay++
           }
 
           acresT += acres
-          if (p != 1) {
-            dinheiro += dinheiro2 + acresT
+          if (incrementTimeCourse != 1) {
+            money += money2 + acresT
           }
           a += acresT
           p++
         }
 
-        answer(dias, a, dinheiro)
+        answer(day, a, money)
       }
       // Mês
-      else if (checar[1].checked) {
-        let acres = 0
-        let divi = diasMeses / periodo // quantas vezes o periodo vai repetir
-        let dia = diasMeses / divi // quantidade de dias em cada periodo
-        let dinheiro2 = dinheiro
-        let p = 1 // incremento periodo
-        let d = 1 /// incremento dia
-        let acresT = 0
-        let a = 0 // acrescenta
-
-        while (p <= divi) {
-          while (d <= dia) {
-            lucro = dinheiro * (0.011369863 / 100)
-            dinheiro += lucro
-            acres += lucro
-            d++
+      else if (check[1].checked) {
+        while (incrementTimeCourse <= timeCourseMonth) {
+          while (incrementDay <= dayTotal) {
+            profit = money * (0.011369863 / 100)
+            money += profit
+            acres += profit
+            incrementDay++
           }
 
           acresT += acres
-          if (p != 1) {
-            dinheiro += dinheiro2 + acresT
+          if (incrementTimeCourse != 1) {
+            money += money2 + acresT
           }
           a += acresT
-          p++
+          incrementTimeCourse++
         }
 
-        answer(dias, a, dinheiro, diasMeses)
+        answer(day, a, money)
       }
     }
   } else {
     //Dia
-    if (checar[0].checked) {
-      let d = 1
-      let acres = 0
-
-      while (d <= dias) {
-        lucro = dinheiro * (0.011369863 / 100)
-        dinheiro += lucro
-        acres += lucro
-        d++
+    if (check[0].checked) {
+      while (incrementDay <= day) {
+        profit = money * (0.011369863 / 100)
+        money += profit
+        acres += profit
+        incrementDay++
       }
-      answer(dias, acres, dinheiro)
+
+      answer(day, acres, money)
     }
     //Mês
-    else if (checar[1].checked) {
-      let d = 1
-      let acres = 0
-
-      while (d <= diasMeses) {
-        lucro = dinheiro * (0.011369863 / 100)
-        dinheiro += lucro
-        acres += lucro
-        d++
+    else if (check[1].checked) {
+      while (incrementDay <= daysMonths) {
+        profit = money * (0.011369863 / 100)
+        money += profit
+        acres += profit
+        incrementDay++
       }
 
-      answer(dias, acres, dinheiro, diasMeses)
+      answer(day, acres, money)
     }
   }
 }
