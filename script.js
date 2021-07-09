@@ -35,14 +35,14 @@ function answer(tempo, acrescimo, total, dMes = 1) {
 }
 
 function calculate() {
-  var money = document.getElementById('txt1')
-  var day = document.getElementById('txt2')
-  var pas = document.getElementById('passo')
+  let money = document.getElementById('txt1')
+  let day = document.getElementById('txt2')
+  let pas = document.getElementById('passo')
 
-  var dinheiro = Number(money.value)
-  var dias = Number(day.value)
-  var diasMeses = 30 * dias
-  var periodo = Number(pas.value)
+  let dinheiro = Number(money.value)
+  let dias = Number(day.value)
+  let diasMeses = 30 * dias
+  let periodo = Number(pas.value)
 
   if (
     money.value.length == 0 ||
@@ -60,14 +60,14 @@ function calculate() {
     } else {
       // Dia
       if (checar[0].checked) {
-        var acres = 0
-        var divi = dias / periodo // quantas vezes o periodo vai repetir
-        var dia = dias / divi // quantidade de dias em cada periodo
-        var dinheiro2 = dinheiro
-        var p = 1 // incremento periodo
-        var d = 1 /// incremento dia
-        var acresT = 0
-        var a = 0 // acrescenta
+        let acres = 0
+        let divi = dias / periodo // quantas vezes o periodo vai repetir
+        let dia = dias / divi // quantidade de dias em cada periodo
+        let dinheiro2 = dinheiro
+        let p = 1 // incremento periodo
+        let d = 1 /// incremento dia
+        let acresT = 0
+        let a = 0 // acrescenta
 
         while (p <= divi) {
           while (d <= dia) {
@@ -89,14 +89,14 @@ function calculate() {
       }
       // Mês
       else if (checar[1].checked) {
-        var acres = 0
-        var divi = diasMeses / periodo // quantas vezes o periodo vai repetir
-        var dia = diasMeses / divi // quantidade de dias em cada periodo
-        var dinheiro2 = dinheiro
-        var p = 1 // incremento periodo
-        var d = 1 /// incremento dia
-        var acresT = 0
-        var a = 0 // acrescenta
+        let acres = 0
+        let divi = diasMeses / periodo // quantas vezes o periodo vai repetir
+        let dia = diasMeses / divi // quantidade de dias em cada periodo
+        let dinheiro2 = dinheiro
+        let p = 1 // incremento periodo
+        let d = 1 /// incremento dia
+        let acresT = 0
+        let a = 0 // acrescenta
 
         while (p <= divi) {
           while (d <= dia) {
@@ -120,8 +120,8 @@ function calculate() {
   } else {
     //Dia
     if (checar[0].checked) {
-      var d = 1
-      var acres = 0
+      let d = 1
+      let acres = 0
 
       while (d <= dias) {
         lucro = dinheiro * (0.011369863 / 100)
@@ -133,8 +133,8 @@ function calculate() {
     }
     //Mês
     else if (checar[1].checked) {
-      var d = 1
-      var acres = 0
+      let d = 1
+      let acres = 0
 
       while (d <= diasMeses) {
         lucro = dinheiro * (0.011369863 / 100)
