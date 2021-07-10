@@ -35,15 +35,16 @@ function answer(time, add, total) {
 }
 
 function calculate() {
-  let money = Number(document.getElementById('txt1').value)
-  let day = Math.trunc(Number(document.getElementById('txt2').value))
-  let step = Math.trunc(Number(document.getElementById('passo').value))
+  let money = document.getElementById('txt1').value.trim()
+  let day = document.getElementById('txt2').value.trim()
+  let step = document.getElementById('passo').value.trim()
 
+  let coin = Number(money)
   let daysMonths = 30 * day
 
   let timeCourse = day / step // quantas vezes o periodo vai repetir
   let daytimeCourse = day / timeCourse // quantidade de dias em cada periodo
-  let money2 = money
+  let money2 = coin
   let incrementTimeCourse = 1 // incremento periodo
   let incrementDay = 1 // incremento dia
   let acresT = 0
@@ -54,11 +55,11 @@ function calculate() {
   let timeCourseMonth = daysMonths / step // quantas vezes o periodo vai repetir
   let dayTotal = daysMonths / timeCourseMonth // quantidade de dias em cada periodo
 
-  if (money.length == '' || day.length == '' || money < 0 || day < 0) {
+  if (money === '' || day === '' || coin < 0 || day < 0) {
     alert('Erro! Por favor digite os dados ou informe apenas dados positivos!')
   } else if (
-    (step.length != 0 && step < daytimeCourse) ||
-    (step.length != 0 && check[1].checked)
+    (step !== '' && Number(step) < Number(day)) ||
+    (step !== '' && check[1].checked)
   ) {
     if (step < 0) {
       alert('O período tem que ser positivo ou maior que a quantidade de dias')
@@ -67,65 +68,71 @@ function calculate() {
       if (check[0].checked) {
         while (incrementTimeCourse <= timeCourse) {
           while (incrementDay <= daytimeCourse) {
-            profit = money * (0.011369863 / 100)
-            money += profit
+            profit = coin * (0.011369863 / 100)
+            coin += profit
             acres += profit
             incrementDay++
           }
 
           acresT += acres
           if (incrementTimeCourse != 1) {
-            money += money2 + acresT
-          }
-          a += acresT
-          p++
-        }
-
-        answer(day, a, money)
-      }
-      // Mês
-      else if (check[1].checked) {
-        while (incrementTimeCourse <= timeCourseMonth) {
-          while (incrementDay <= dayTotal) {
-            profit = money * (0.011369863 / 100)
-            money += profit
-            acres += profit
-            incrementDay++
-          }
-
-          acresT += acres
-          if (incrementTimeCourse != 1) {
-            money += money2 + acresT
+            coin += money2 + acresT
           }
           a += acresT
           incrementTimeCourse++
         }
 
-        answer(day, a, money)
+        console.log('condição 1')
+
+        answer(day, a, coin)
+      }
+      // Mês
+      else if (check[1].checked) {
+        while (incrementTimeCourse <= timeCourseMonth) {
+          while (incrementDay <= dayTotal) {
+            profit = coin * (0.011369863 / 100)
+            coin += profit
+            acres += profit
+            incrementDay++
+          }
+
+          acresT += acres
+          if (incrementTimeCourse != 1) {
+            coin += money2 + acresT
+          }
+          a += acresT
+          incrementTimeCourse++
+        }
+
+        console.log('condição 2')
+        answer(day, a, coin)
       }
     }
   } else {
     //Dia
     if (check[0].checked) {
       while (incrementDay <= day) {
-        profit = money * (0.011369863 / 100)
-        money += profit
+        profit = coin * (0.011369863 / 100)
+        coin += profit
         acres += profit
         incrementDay++
       }
 
-      answer(day, acres, money)
+      console.log('condição 3')
+      answer(day, acres, coin)
     }
     //Mês
     else if (check[1].checked) {
       while (incrementDay <= daysMonths) {
-        profit = money * (0.011369863 / 100)
-        money += profit
+        profit = coin * (0.011369863 / 100)
+        coin += profit
         acres += profit
         incrementDay++
       }
 
-      answer(day, acres, money)
+      console.log('condição 4')
+
+      answer(day, acres, coin)
     }
   }
 }
