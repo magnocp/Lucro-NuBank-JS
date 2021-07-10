@@ -36,8 +36,8 @@ function answer(time, add, total) {
 
 function calculate() {
   let money = Number(document.getElementById('txt1').value)
-  let day = document.getElementById('txt2').value
-  let step = document.getElementById('passo').value
+  let day = Math.trunc(Number(document.getElementById('txt2').value))
+  let step = Math.trunc(Number(document.getElementById('passo').value))
 
   let daysMonths = 30 * day
 
