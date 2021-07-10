@@ -82,8 +82,6 @@ function calculate() {
           incrementTimeCourse++
         }
 
-        console.log('condição 1')
-
         answer(day, a, coin)
       }
       // Mês
@@ -104,7 +102,6 @@ function calculate() {
           incrementTimeCourse++
         }
 
-        console.log('condição 2')
         answer(day, a, coin)
       }
     }
@@ -118,7 +115,6 @@ function calculate() {
         incrementDay++
       }
 
-      console.log('condição 3')
       answer(day, acres, coin)
     }
     //Mês
@@ -129,8 +125,6 @@ function calculate() {
         acres += profit
         incrementDay++
       }
-
-      console.log('condição 4')
 
       answer(day, acres, coin)
     }
