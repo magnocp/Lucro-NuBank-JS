@@ -68,7 +68,7 @@ function calculate() {
       if (check[0].checked) {
         while (incrementTimeCourse <= timeCourse) {
           while (incrementDay <= daytimeCourse) {
-            profit = coin * (0.011369863 / 100)
+            profit = coin * (0.014109589 / 100)
             coin += profit
             acres += profit
             incrementDay++
@@ -88,7 +88,7 @@ function calculate() {
       else if (check[1].checked) {
         while (incrementTimeCourse <= timeCourseMonth) {
           while (incrementDay <= dayTotal) {
-            profit = coin * (0.011369863 / 100)
+            profit = coin * (0.014109589 / 100)
             coin += profit
             acres += profit
             incrementDay++
@@ -109,7 +109,7 @@ function calculate() {
     //Dia
     if (check[0].checked) {
       while (incrementDay <= day) {
-        profit = coin * (0.011369863 / 100)
+        profit = coin * (0.014109589 / 100)
         coin += profit
         acres += profit
         incrementDay++
@@ -120,7 +120,7 @@ function calculate() {
     //Mês
     else if (check[1].checked) {
       while (incrementDay <= daysMonths) {
-        profit = coin * (0.011369863 / 100)
+        profit = coin * (0.014109589 / 100)
         coin += profit
         acres += profit
         incrementDay++
