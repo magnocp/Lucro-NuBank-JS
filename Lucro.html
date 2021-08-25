@@ -10,7 +10,7 @@
     <header>
       <h1>Lucro NuBank</h1>
     </header>
-    <form action="" onsubmit="Form.submit(event)">
+    <form action="" onsubmit="calculate(event)">
       <p>
         <strong>Digite o saldo disponível ou depósito na NuBank</strong><br />
         <input type="number" name="txt1" id="txt1" />
@@ -37,13 +37,7 @@
 
       <div class="obs">*mês = 30 dias úteis</div>
 
-      <input
-        type="button"
-        value="Calcular"
-        name="btn"
-        id="btn"
-        onclick="calculate()"
-      />
+      <button>Calcular</button>
 
       <div id="res"></div>
     </form>

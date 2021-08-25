@@ -34,7 +34,8 @@ function answer(time, add, total) {
   }
 }
 
-function calculate() {
+function calculate(event) {
+  event.preventDefault()
   let money = document.getElementById('txt1').value.trim()
   let day = document.getElementById('txt2').value.trim()
   let step = document.getElementById('passo').value.trim()
