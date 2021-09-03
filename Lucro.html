@@ -12,18 +12,20 @@
     </header>
     <form action="" onsubmit="calculate(event)">
       <p>
-        <strong>Digite o saldo disponível ou depósito na NuBank</strong><br />
+        <label for="txt1">
+          Digite o saldo disponível ou depósito na NuBank</label
+        ><br />
         <input type="number" name="txt1" id="txt1" />
       </p>
 
       <p>
-        <strong></strong>Digite a frequência do depósito do valor acima em dias
-        úteis <strong>(Opcional)</strong><br />
+        Digite a frequência do depósito do valor acima em dias úteis
+        <strong>(Opcional)</strong><br />
         <input type="number" name="passo" id="passo" />
       </p>
 
       <p>
-        <strong>Cálculo em dias úteis ou em meses?</strong> <br />
+        <label>Cálculo em dias úteis ou em meses?</label> <br />
         <input type="radio" name="escolha" id="dia" checked />
         <label for="dia">Dia</label>
         <input type="radio" name="escolha" id="mes" />
@@ -31,7 +33,9 @@
       </p>
 
       <p>
-        <strong>Digite a quantidade de dias/mês úteis desejados</strong><br />
+        <label for="txt2"
+          >Digite a quantidade de dias/mês úteis desejados </label
+        ><br />
         <input type="number" name="txt2" id="txt2" />
       </p>
 
