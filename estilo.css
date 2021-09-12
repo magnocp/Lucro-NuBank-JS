@@ -1,5 +1,6 @@
 body {
   background-color: #8a05be;
+  min-width: 290px;
 }
 h1 {
   color: white;
@@ -14,9 +15,10 @@ form {
   border-radius: 10px;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.295);
 }
-p {
+.content {
   text-align: center;
   color: rgb(15, 15, 15);
+  margin: 20px;
 }
 
 label {
@@ -31,9 +33,8 @@ input[type='number'] {
   font-size: 0.9rem;
 }
 button {
-  margin-left: 40%;
-  margin-left: 40%;
-  width: 20%;
+  width: 30%;
+  border-radius: 8px;
   background-color: rgb(112, 21, 85);
   color: white;
   padding: 1%;
@@ -57,13 +58,16 @@ footer {
 }
 
 @media (max-width: 900px) {
-  section {
-    width: 60%;
+  form {
+    width: 80%;
   }
 }
 
 @media (max-width: 600px) {
-  section {
-    width: 100%;
+  form {
+    width: 95%;
+  }
+  button {
+    width: 70%;
   }
 }

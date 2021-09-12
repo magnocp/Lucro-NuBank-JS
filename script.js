@@ -36,6 +36,7 @@ function answer(time, add, total) {
 
 function calculate(event) {
   event.preventDefault()
+  let fees = document.getElementById('fees').value.trim()
   let money = document.getElementById('txt1').value.trim()
   let day = document.getElementById('txt2').value.trim()
   let step = document.getElementById('passo').value.trim()
@@ -56,7 +57,14 @@ function calculate(event) {
   let timeCourseMonth = daysMonths / step // quantas vezes o periodo vai repetir
   let dayTotal = daysMonths / timeCourseMonth // quantidade de dias em cada periodo
 
-  if (money === '' || day === '' || coin < 0 || day < 0) {
+  if (
+    money === '' ||
+    day === '' ||
+    fees === '' ||
+    fees < 0 ||
+    coin < 0 ||
+    day < 0
+  ) {
     alert('Erro! Por favor digite os dados ou informe apenas dados positivos!')
   } else if (
     (step !== '' && Number(step) < Number(day)) ||
@@ -69,7 +77,7 @@ function calculate(event) {
       if (check[0].checked) {
         while (incrementTimeCourse <= timeCourse) {
           while (incrementDay <= daytimeCourse) {
-            profit = coin * (0.014109589 / 100)
+            profit = coin * (fees / 365 / 100)
             coin += profit
             acres += profit
             incrementDay++
@@ -89,7 +97,7 @@ function calculate(event) {
       else if (check[1].checked) {
         while (incrementTimeCourse <= timeCourseMonth) {
           while (incrementDay <= dayTotal) {
-            profit = coin * (0.014109589 / 100)
+            profit = coin * (fees / 365 / 100)
             coin += profit
             acres += profit
             incrementDay++
@@ -110,7 +118,7 @@ function calculate(event) {
     //Dia
     if (check[0].checked) {
       while (incrementDay <= day) {
-        profit = coin * (0.014109589 / 100)
+        profit = coin * (fees / 365 / 100)
         coin += profit
         acres += profit
         incrementDay++
@@ -121,7 +129,7 @@ function calculate(event) {
     //Mês
     else if (check[1].checked) {
       while (incrementDay <= daysMonths) {
-        profit = coin * (0.014109589 / 100)
+        profit = coin * (fees / 365 / 100)
         coin += profit
         acres += profit
         incrementDay++
