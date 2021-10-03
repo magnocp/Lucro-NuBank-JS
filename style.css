@@ -2,6 +2,10 @@ body {
   background-color: #8a05be;
   min-width: 290px;
 }
+
+header {
+  margin-top: 75px;
+}
 h1 {
   color: white;
   text-align: center;
