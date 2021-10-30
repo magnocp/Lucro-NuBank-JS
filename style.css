@@ -54,13 +54,6 @@ div#res {
   margin: 5%;
 }
 
-footer {
-  color: white;
-  text-align: center;
-  margin: 4%;
-  text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.904);
-}
-
 @media (max-width: 900px) {
   form {
     width: 80%;
