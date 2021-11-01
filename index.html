@@ -3,61 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lucro</title>
+    <meta
+      name="description"
+      content="Veja quando o seu dinheiro renderá na Nubank ou em outro banco aproximadamente"
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
+    <title>Rendimento Nubank ou outro banco</title>
   </head>
   <body>
     <header>
-      <h1>Lucro NuBank</h1>
+      <h1>Rendimento NuBank ou outro banco</h1>
     </header>
-    <form action="" onsubmit="calculate(event)">
-      <div class="content">
-        <label for="fees"> Digite o valor do rendimento ao ano</label><br />
-        <input
-          type="number"
-          step="0.01"
-          name="fees"
-          id="fees"
-          placeholder="Ex.: 5,15"
-        />
-      </div>
+    <main>
+      <form action="" onsubmit="calculate(event)">
+        <div class="content">
+          <label for="fees">Digite o valor do rendimento ao ano</label><br />
+          <input
+            type="number"
+            step="0.01"
+            name="fees"
+            id="fees"
+            placeholder="Ex.: 5,15"
+          />
+        </div>
 
-      <div class="content">
-        <label for="txt1">
-          Digite o saldo disponível ou depósito na NuBank</label
-        ><br />
-        <input type="number" step="0.01" name="txt1" id="txt1" />
-      </div>
+        <div class="content">
+          <label for="txt1">
+            Digite o saldo disponível ou depósito na NuBank ou outro
+            banco</label
+          ><br />
+          <input type="number" step="0.01" name="txt1" id="txt1" />
+        </div>
 
-      <div class="content">
-        Digite a frequência do depósito do valor acima em dias úteis
-        <strong>(Opcional)</strong><br />
-        <input type="number" name="passo" id="passo" />
-      </div>
+        <div class="content">
+          Digite a frequência do depósito do valor acima em dias úteis
+          <strong>(Opcional)</strong><br />
+          <input type="number" name="passo" id="passo" />
+        </div>
 
-      <div class="content">
-        <label>Cálculo em dias úteis ou em meses?</label> <br />
-        <input type="radio" name="escolha" id="dia" checked />
-        <label for="dia">Dia</label>
-        <input type="radio" name="escolha" id="mes" />
-        <label for="mes">Mês</label>
-      </div>
+        <div class="content">
+          <label>Cálculo em dias úteis ou em meses?</label> <br />
+          <input type="radio" name="escolha" id="dia" checked />
+          <label for="dia">Dia</label>
+          <input type="radio" name="escolha" id="mes" />
+          <label for="mes">Mês</label>
+        </div>
 
-      <div class="content">
-        <label for="txt2"
-          >Digite a quantidade de dias/mês úteis desejados </label
-        ><br />
-        <input type="number" name="txt2" id="txt2" />
-      </div>
+        <div class="content">
+          <label for="txt2"
+            >Digite a quantidade de dias/mês úteis desejados </label
+          ><br />
+          <input type="number" name="txt2" id="txt2" />
+        </div>
 
-      <div class="obs">*mês = 30 dias úteis</div>
+        <div class="obs">*mês = 30 dias úteis</div>
 
-      <div class="content">
-        <button>Calcular</button>
-      </div>
+        <div class="content">
+          <button>Calcular</button>
+        </div>
 
-      <div id="res"></div>
-    </form>
+        <div id="res"></div>
+      </form>
+    </main>
+
+    <footer class="content">
+      <a href="https://aprendetudo.com/">aprendetudo.com</a>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>

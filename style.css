@@ -1,6 +1,7 @@
 body {
   background-color: #8a05be;
   min-width: 290px;
+  font-family: 'Roboto', sans-serif;
 }
 
 header {
@@ -11,11 +12,16 @@ h1 {
   text-align: center;
   text-shadow: 5px 3px 5px rgba(0, 0, 0, 0.473);
 }
+main {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
 form {
   background: white;
   padding: 1%;
   margin: auto;
-  width: 45%;
+  width: 50%;
   border-radius: 10px;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.295);
 }
@@ -54,6 +60,18 @@ div#res {
   margin: 5%;
 }
 
+footer a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 900px) {
   form {
     width: 80%;
@@ -66,5 +84,15 @@ div#res {
   }
   button {
     width: 70%;
+  }
+}
+
+@media (max-width: 400px) {
+  body {
+    margin: 0;
+  }
+
+  form {
+    padding: 0;
   }
 }
