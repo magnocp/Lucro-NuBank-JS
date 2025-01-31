@@ -1,141 +1,103 @@
-let result = document.getElementById('res')
-let check = document.getElementsByName('escolha')
+const RESULT_ELEMENT = document.getElementById('res');
+const CHOICE_ELEMENTS = document.getElementsByName('escolha');
+
+const DAILY_FEE_RATE = 1 / 365;
+const PERCENTAGE_CONVERSION = 100;
 
 function formatCurrency(value) {
-  value = value.toLocaleString('pt-BR', {
+  return value.toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL'
-  })
-
-  return value
+  });
 }
 
-function answer(time, add, total) {
-  if (check[0].checked) {
-    // dia
-    result.innerHTML = `O seu lucro em <strong>${time} ${
-      time == 1 ? 'dia' : 'dias'
-    } </strong>
-    é de aproximadamente <strong>${formatCurrency(
-      add
-    )}</strong> <br> ficando assim no total de <strong>${formatCurrency(
-      total
-    )}<strong>`
-  } else if (check[1].checked) {
-    // mês
-    result.innerHTML = `O seu lucro em <strong>${time} ${
-      time == 1 ? 'mês' : 'meses'
-    } </strong>
-    é de aproximadamente <strong>${formatCurrency(
-      add
-    )}</strong> <br> ficando assim no total de <strong>${formatCurrency(
-      total
-    )}<strong>`
+function getCheckedChoice() {
+  return Array.from(CHOICE_ELEMENTS).find(element => element.checked);
+}
+
+function getPeriodText(period, isPlural) {
+  const periodName = getCheckedChoice().id === 'dia' ? 'dia' : 'mês';
+  return `${period} ${isPlural ? periodName + 's' : periodName}`;
+}
+
+function calculateProfit(initialAmount, feeRate, days) {
+  let currentAmount = initialAmount;
+  let totalProfit = 0;
+
+  for (let i = 0; i < days; i++) {
+    const dailyProfit = currentAmount * feeRate;
+    currentAmount += dailyProfit;
+    totalProfit += dailyProfit;
+  }
+
+  return { finalAmount: currentAmount, totalProfit };
+}
+
+function calculateWithSteps(initialAmount, feeRate, totalDays, stepSize) {
+  const periods = Math.floor(totalDays / stepSize);
+  const daysPerPeriod = Math.ceil(totalDays / periods);
+
+  let currentAmount = initialAmount;
+  let totalProfit = 0;
+
+  for (let i = 0; i < periods; i++) {
+    const { finalAmount, profit } = calculateProfit(currentAmount, feeRate, daysPerPeriod);
+    currentAmount = finalAmount + initialAmount + (i > 0 ? profit : 0);
+    totalProfit += profit;
+  }
+
+  return { finalAmount: currentAmount, totalProfit };
+}
+
+function displayResult(days, totalProfit, finalAmount) {
+  const periodText = getPeriodText(days, days > 1);
+  const resultHtml = `
+    O seu lucro em <strong>${periodText}</strong>
+    é de aproximadamente <strong>${formatCurrency(totalProfit)}</strong><br>
+    ficando assim no total de <strong>${formatCurrency(finalAmount)}</strong>
+  `;
+  RESULT_ELEMENT.innerHTML = resultHtml;
+}
+
+function validateInput(fees, money, days, step) {
+  if ([fees, money, days].some(val => val === '') || [fees, money, days].some(val => parseFloat(val) < 0)) {
+    throw new Error('Por favor, preencha todos os campos com valores positivos.');
+  }
+  
+  if (step !== '' && (parseFloat(step) >= parseFloat(days) || getCheckedChoice().id === 'mes')) {
+    throw new Error('O período deve ser menor que a quantidade de dias e não pode ser usado para meses.');
+  }
+  
+  if (step !== '' && parseFloat(step) < 0) {
+    throw new Error('O período deve ser um valor positivo.');
   }
 }
 
 function calculate(event) {
-  event.preventDefault()
-  let fees = document.getElementById('fees').value.trim()
-  let money = document.getElementById('txt1').value.trim()
-  let day = document.getElementById('txt2').value.trim()
-  let step = document.getElementById('passo').value.trim()
+  event.preventDefault();
+  
+  try {
+    const [fees, money, days, step] = [
+      document.getElementById('fees').value.trim(),
+      document.getElementById('txt1').value.trim(),
+      document.getElementById('txt2').value.trim(),
+      document.getElementById('passo').value.trim()
+    ];
 
-  let coin = Number(money)
-  let daysMonths = 30 * day
+    validateInput(fees, money, days, step);
 
-  let timeCourse = day / step // quantas vezes o periodo vai repetir
-  let daytimeCourse = day / timeCourse // quantidade de dias em cada periodo
-  let money2 = coin
-  let incrementTimeCourse = 1 // incremento periodo
-  let incrementDay = 1 // incremento dia
-  let acresT = 0
-  let a = 0 // acrescenta
+    const feeRate = parseFloat(fees) / PERCENTAGE_CONVERSION * DAILY_FEE_RATE;
+    const totalDays = parseInt(days) * (getCheckedChoice().id === 'mes' ? 30 : 1);
 
-  let acres = 0
-
-  let timeCourseMonth = daysMonths / step // quantas vezes o periodo vai repetir
-  let dayTotal = daysMonths / timeCourseMonth // quantidade de dias em cada periodo
-
-  if (
-    money === '' ||
-    day === '' ||
-    fees === '' ||
-    fees < 0 ||
-    coin < 0 ||
-    day < 0
-  ) {
-    alert('Erro! Por favor digite os dados ou informe apenas dados positivos!')
-  } else if (
-    (step !== '' && Number(step) < Number(day)) ||
-    (step !== '' && check[1].checked)
-  ) {
-    if (step < 0) {
-      alert('O período tem que ser positivo ou maior que a quantidade de dias')
+    let result;
+    if (step !== '') {
+      result = calculateWithSteps(parseFloat(money), feeRate, totalDays, parseInt(step));
     } else {
-      // Dia
-      if (check[0].checked) {
-        while (incrementTimeCourse <= timeCourse) {
-          while (incrementDay <= daytimeCourse) {
-            profit = coin * (fees / 365 / 100)
-            coin += profit
-            acres += profit
-            incrementDay++
-          }
-
-          acresT += acres
-          if (incrementTimeCourse != 1) {
-            coin += money2 + acresT
-          }
-          a += acresT
-          incrementTimeCourse++
-        }
-
-        answer(day, a, coin)
-      }
-      // Mês
-      else if (check[1].checked) {
-        while (incrementTimeCourse <= timeCourseMonth) {
-          while (incrementDay <= dayTotal) {
-            profit = coin * (fees / 365 / 100)
-            coin += profit
-            acres += profit
-            incrementDay++
-          }
-
-          acresT += acres
-          if (incrementTimeCourse != 1) {
-            coin += money2 + acresT
-          }
-          a += acresT
-          incrementTimeCourse++
-        }
-
-        answer(day, a, coin)
-      }
+      result = calculateProfit(parseFloat(money), feeRate, totalDays);
     }
-  } else {
-    //Dia
-    if (check[0].checked) {
-      while (incrementDay <= day) {
-        profit = coin * (fees / 365 / 100)
-        coin += profit
-        acres += profit
-        incrementDay++
-      }
 
-      answer(day, acres, coin)
-    }
-    //Mês
-    else if (check[1].checked) {
-      while (incrementDay <= daysMonths) {
-        profit = coin * (fees / 365 / 100)
-        coin += profit
-        acres += profit
-        incrementDay++
-      }
-
-      answer(day, acres, coin)
-    }
+    displayResult(parseInt(days), result.totalProfit, result.finalAmount);
+  } catch (error) {
+    alert(error.message);
   }
 }
